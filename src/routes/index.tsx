@@ -1,5 +1,5 @@
 import { IconCalculator, IconDashboard } from "@tabler/icons-react";
-import { DashboardPage, QuotationPage } from "../pages";
+import { DashboardPage, QuotationPage,ProjectPage } from "../pages";
 
 const routes = [
     {
@@ -12,6 +12,12 @@ const routes = [
         name: "Quotation",
         path: "/quotation",
         element: QuotationPage,
+        icon: IconCalculator
+    },
+    {
+        name: "Project",
+        path: "/project",
+        element: ProjectPage,
         icon: IconCalculator
     }
 ]
