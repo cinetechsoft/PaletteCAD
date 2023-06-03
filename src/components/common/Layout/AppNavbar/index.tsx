@@ -13,7 +13,7 @@ function AppNavbar({ opened }: AppNavbarProps) {
             {
                 routes.map(route => <Link to={route.path} key={route.name} style={{
                     all: `unset`
-                }}> <NavLink label={route.name} icon={route.icon} />
+                }}> <NavLink label={route.name} icon={<route.icon />} />
                 </Link>)
             }
 

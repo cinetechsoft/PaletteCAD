@@ -9,6 +9,7 @@ import {
 } from '@mantine/core';
 import AppNavbar from './components/common/Layout/AppNavbar';
 import { Outlet } from 'react-router-dom';
+import Loader from './components/common/Loader';
 
 export default function App() {
   const theme = useMantineTheme();
@@ -56,7 +57,7 @@ export default function App() {
         </Header>
       }
     >
-      <Suspense fallback={<div>Loading</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </AppShell>
