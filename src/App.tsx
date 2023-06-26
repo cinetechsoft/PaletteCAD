@@ -25,7 +25,7 @@ export default function App() {
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
       navbar={
-        <AppNavbar opened={!opened} />
+        <AppNavbar opened={opened} />
       }
       /* aside={
         <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>

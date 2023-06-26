@@ -1,8 +1,17 @@
 import React from 'react'
 import { TextInput } from '@mantine/core';
-function TextField() {
+import { Controller } from 'react-hook-form';
+interface TextFieldProps {
+  name: string
+}
+function TextField({ name }) {
   return (
-    <TextInput/>
+    <Controller
+      name={name}
+      render={
+        () => (<TextInput />)
+      }
+    />
   )
 }
 

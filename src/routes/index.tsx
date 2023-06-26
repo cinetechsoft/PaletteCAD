@@ -1,18 +1,25 @@
-import { IconCalculator, IconDashboard } from "@tabler/icons-react";
-import { DashboardPage, QuotationPage } from "../pages";
+import { IconCalculator, IconDashboard, IconProgress } from "@tabler/icons-react";
+import * as LazyLoaded from "../pages";
 
 const routes = [
     {
         name: "Dashboard",
         path: "/",
-        element: DashboardPage,
+        element: LazyLoaded.DashboardPage,
         icon: IconDashboard
     },
     {
         name: "Quotation",
-        path: "/quotation",
-        element: QuotationPage,
+        path: "/quotation/:projectID",
+        element: LazyLoaded.QuotationPage,
+        isHidden: true,
         icon: IconCalculator
+    },
+    {
+        name: "Project",
+        path: "/project",
+        element: LazyLoaded.ProjectPage,
+        icon: IconProgress
     }
 ]
 
