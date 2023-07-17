@@ -13,8 +13,8 @@ import {
 import { Table } from '@mantine/core';
 
 interface DataTableProps {
-    data: unknown[];
-    columns: ColumnDef<unknown, any>[];
+    data: any[];
+    columns: ColumnDef<any, any>[];
     refreshData?: () => void
 }
 function DataTable({ data, columns, refreshData }: DataTableProps) {

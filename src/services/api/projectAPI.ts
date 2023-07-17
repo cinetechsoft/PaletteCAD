@@ -13,7 +13,10 @@ export const projectAPI = createApi({
     getProjectByProjectID: builder.query<Project, string | unknown>({
       query: (projectID) => `/${projectID}`,
     }),
+    createProject: builder.mutation<Project, Project>({
+      query: (project) => ({ url: `/AddAddProjectMst`, method: "POST", body: project,}),
+    }),
   }),
 })
 
-export const { useGetAllProjectsQuery, useLazyGetProjectByProjectIDQuery } = projectAPI
+export const { useGetAllProjectsQuery, useLazyGetProjectByProjectIDQuery, useCreateProjectMutation } = projectAPI

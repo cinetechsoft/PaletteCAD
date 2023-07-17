@@ -15,8 +15,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <BrowserRouter >
           <Routes>
             <Route path="/" element={<App />}>
-              {routes.map((route, index) => <Route key={route.name + route.path + index} path={route.path} element={<route.element />} />)
+              {routes.map((route, index) => <><Route key={route.name + route.path + index} path={route.path} element={<route.element />} />
+                {route?.subRoutes?.map(subRoute => <Route key={subRoute.name + subRoute.path + index} path={subRoute.path} element={<subRoute.element />} />)}
+              </>)
               }
+
             </Route>
           </Routes>
         </BrowserRouter>

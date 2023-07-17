@@ -1,7 +1,14 @@
-import { IconCalculator, IconDashboard, IconProgress } from "@tabler/icons-react";
+import { IconCalculator, IconDashboard, IconProgress, TablerIconsProps } from "@tabler/icons-react";
 import * as LazyLoaded from "../pages";
-
-const routes = [
+export interface RouteItem {
+    name: string;
+    path: string;
+    element: React.LazyExoticComponent<() => JSX.Element>;
+    icon: (props: TablerIconsProps) => JSX.Element;
+    isHidden?: boolean;
+    subRoutes?: RouteItem[];
+}
+const routes: RouteItem[] = [
     {
         name: "Dashboard",
         path: "/",
@@ -20,6 +27,20 @@ const routes = [
         path: "/project",
         element: LazyLoaded.ProjectPage,
         icon: IconProgress
+    },
+    {
+        name: "Master",
+        path: "/master",
+        element: LazyLoaded.ProjectPage,
+        icon: IconProgress,
+        subRoutes: [
+            {
+                name: "Customer",
+                path: "/customer",
+                element: LazyLoaded.CustomerPage,
+                icon: IconProgress
+            }
+        ]
     }
 ]
 
