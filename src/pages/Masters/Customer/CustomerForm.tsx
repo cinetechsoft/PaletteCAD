@@ -1,12 +1,15 @@
 import { Button, Grid } from '@mantine/core'
-import React from 'react'
+import React, { useEffect } from 'react'
 import TextField from '../../../components/common/Inputs/TextField'
 import { Form } from '../../../components/common/Form'
 import { useCreateCustomerMutation } from '../../../services/api/master/customerAPI'
 import { z } from 'zod'
 import { notifications } from '@mantine/notifications'
+import ShowroomDropdown from '../../../components/common/FormSpecific/ShowroomDropdown'
+import StateDropdown from '../../../components/common/FormSpecific/StateDropdown'
+import CityDropdown from '../../../components/common/FormSpecific/CityDropdown'
 
-function CustomerForm({ initialValues }) {
+function CustomerForm({ initialValues, setOpened }) {
     const [createCustomer] = useCreateCustomerMutation()
     return (
         <Form initialValues={initialValues} schema={z.object({
@@ -26,26 +29,53 @@ function CustomerForm({ initialValues }) {
             active: z.string(),
             customerNumber: z.string(),
 
-        })} onSubmit={(values) => { createCustomer(values).then(res=>{
-            notifications.show({message:"New Customer was added",title:"Customer Added"})
-        }) }}>
+        })} onSubmit={(values) => {
+            console.log((values))
+            createCustomer(values).then(res => {
+                setOpened()
+                notifications.show({
+                    message: "New Customer was added",
+                    title: "Customer Added",
+                    autoClose: 2000,
+                })
+
+            })
+        }}>
             <Grid columns={4}>
-                <TextField name='custID' label='custID' />
-                <TextField name='custName' label='custName' />
-                <TextField name='custCode' label='custCode' />
-                <TextField name='address' label='address' />
-                <TextField name='showroomID' label='showroomID' />
-                <TextField name='showroomName' label='showroomName' />
-                <TextField name='stateID' label='stateID' />
-                <TextField name='stateName' label='stateName' />
-                <TextField name='cityID' label='cityID' />
-                <TextField name='cityName' label='cityName' />
-                <TextField name='mobNo' label='mobNo' />
-                <TextField name='email' label='email' />
-                <TextField name='contactPerson' label='contactPerson' />
-                <TextField name='active' label='active' />
-                <TextField name='customerNumber' label='customerNumber' />
-                <Button type='submit'>Submit</Button>
+                <Grid.Col span={2}>
+                    <TextField label='Name' name='custName' />
+                </Grid.Col>
+                <Grid.Col span={2}>
+                    <TextField label='Code' name='custCode' />
+                </Grid.Col>
+                <Grid.Col span={2}>
+                    <TextField label='Address' name='address' />
+                </Grid.Col>
+                <Grid.Col span={2}>
+                    <ShowroomDropdown name="Showroom" />
+                </Grid.Col>
+                <Grid.Col span={2}>
+                    <StateDropdown name="State" />
+                </Grid.Col>
+                <Grid.Col span={2}>
+                    <CityDropdown name="City" stateFieldName={'stateID'} />
+                </Grid.Col>
+                <Grid.Col span={2}>
+                    <TextField name='mobNo' label='Mobile Number' />
+                </Grid.Col>
+                <Grid.Col span={2}>
+                    <TextField name='email' label='Email' />
+                </Grid.Col>
+                <Grid.Col span={2}>
+                    <TextField name='contactPerson' label='Contact person' />
+                </Grid.Col>
+                <Grid.Col span={2}>
+                    <TextField name='customerNumber' label='Customer Number' />
+                </Grid.Col>
+                <Grid.Col>
+                    <Button type='submit'>Submit</Button>
+                </Grid.Col>
+
             </Grid>
         </Form>
     )

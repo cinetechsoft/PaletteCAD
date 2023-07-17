@@ -37,22 +37,22 @@ function Customer() {
                 ]} />
             </Paper>
             <Modal title="Add Customer" size={"lg"} opened={opened} onClose={setOpened}>
-                <CustomerForm initialValues={{
+                <CustomerForm setOpened={setOpened} initialValues={{
                     "custID": 0,
-                    "custName": "string",
-                    "custCode": "string",
-                    "address": "string",
+                    "custName": "",
+                    "custCode": "",
+                    "address": "",
                     "showroomID": 0,
-                    "showroomName": "string",
+                    "showroomName": "",
                     "stateID": 0,
-                    "stateName": "string",
+                    "stateName": "",
                     "cityID": 0,
-                    "cityName": "string",
-                    "mobNo": "string",
-                    "email": "string",
-                    "contactPerson": "string",
-                    "active": "string",
-                    "customerNumber": "string"
+                    "cityName": "",
+                    "mobNo": "",
+                    "email": "",
+                    "contactPerson": "",
+                    "active": "Y",
+                    "customerNumber": ""
                 }} />
             </Modal>
         </Paper>

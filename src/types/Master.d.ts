@@ -48,7 +48,21 @@ interface Showroom {
     percentDiscountMarkup: number
     showroomAbbreviation: string
     showroomOverhead: number
-  }
-  
-  
+}
+
+
 type AllShowrooms = Showroom[]
+
+interface City {
+    cityId: number;
+    cityName: string;
+    stateId: number;
+}
+
+type AllCities = City[]
+interface State {
+    stateId: number;
+    stateName: string;
+}
+
+type AllStates = State[]

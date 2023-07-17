@@ -12,6 +12,7 @@ import AutoCompleteField from '../../components/common/Inputs/AutoCompleteField'
 import { useGetAllShowroomsQuery } from '../../services/api/master/showroomAPI';
 import { useGetAllCustomersQuery } from '../../services/api/master/customerAPI';
 import { useGetAllInfluencersQuery } from '../../services/api/master/influencerAPI';
+import ShowroomDropdown from '../../components/common/FormSpecific/ShowroomDropdown';
 
 const useStyles = createStyles((theme) => ({
     title: {
@@ -60,7 +61,6 @@ const useStyles = createStyles((theme) => ({
 function Project() {
     const { classes, theme } = useStyles();
     const { data } = useGetAllProjectsQuery();
-    const { data: allShowrooms } = useGetAllShowroomsQuery();
     const { data: allCustomers } = useGetAllCustomersQuery();
     const { data: allInfluencers } = useGetAllInfluencersQuery();
     const [open, setToggle] = useToggle();
@@ -146,7 +146,7 @@ function Project() {
                         <AutoCompleteField label="Customer ID" name={'customerId'} data={allCustomers?.map(e => ({ ...e, value: `${e.custID}`, label: `${e.custName}` })) ?? []} />
                         {/* <TextField label="" name={'active'} /> */}
                         <TextField label="Email" name={'emailId'} />
-                        <AutoCompleteField label="Shworoom" name={'showroomId'} data={allShowrooms?.map(e => ({ ...e, value: `${e.showroomId}`, label: `${e.showroomName}` })) ?? []} />
+                        <ShowroomDropdown name={'showroomId'} />
                         <AutoCompleteField label="Influencer" name={'influencerId'} data={allInfluencers?.map(e => ({ ...e, value: `${e.influencer_Mast_id}`, label: `${e.influencer_Name}` })) ?? []} />
                         <Button type='submit'>Submit</Button>
                     </SimpleGrid>

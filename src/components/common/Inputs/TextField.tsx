@@ -10,7 +10,7 @@ function TextField({ name, ...rest }: TextFieldProps) {
     <Controller
       name={name}
       render={
-        ({ field, fieldState, formState }) => (<TextInput  {...rest} {...field} />)
+        ({ field, fieldState, formState }) => (<TextInput {...rest} {...field} />)
       }
     />
   )
