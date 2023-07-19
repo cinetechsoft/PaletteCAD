@@ -7,6 +7,7 @@ function CityDropdown({ name, stateFieldName }: { name: string; stateFieldName: 
     const [getAllCitiesByStateID, { data: allCities }] = useLazyGetAllCitiesByStateIDQuery();
     const { getValues, watch, setValue } = useFormContext();
     useEffect(() => {
+        // getValues("cityID")setValue(name, { label: "", value: "" })
         const state = getValues(stateFieldName)
         getAllCitiesByStateID(state)
     }, [watch(stateFieldName)])

@@ -2,15 +2,17 @@ import { Button, Grid } from '@mantine/core'
 import React, { useEffect } from 'react'
 import TextField from '../../../components/common/Inputs/TextField'
 import { Form } from '../../../components/common/Form'
-import { useCreateCustomerMutation } from '../../../services/api/master/customerAPI'
+import { useCreateCustomerMutation, useUpdateCustomerMutation } from '../../../services/api/master/customerAPI'
 import { z } from 'zod'
 import { notifications } from '@mantine/notifications'
-import ShowroomDropdown from '../../../components/common/FormSpecific/ShowroomDropdown'
-import StateDropdown from '../../../components/common/FormSpecific/StateDropdown'
-import CityDropdown from '../../../components/common/FormSpecific/CityDropdown'
+import ShowroomDropdown from '../../../components/common/GenericDropdowns/ShowroomDropdown'
+import StateDropdown from '../../../components/common/GenericDropdowns/StateDropdown'
+import CityDropdown from '../../../components/common/GenericDropdowns/CityDropdown'
 
-function CustomerForm({ initialValues, setOpened }) {
+function CustomerForm({ initialValues, setOpened }: { initialValues: Customer; setOpened: () => {} }) {
+    console.log(initialValues)
     const [createCustomer] = useCreateCustomerMutation()
+    const [updateCustomer] = useUpdateCustomerMutation()
     return (
         <Form initialValues={initialValues} schema={z.object({
             custID: z.number(),
@@ -30,10 +32,14 @@ function CustomerForm({ initialValues, setOpened }) {
             customerNumber: z.string(),
 
         })} onSubmit={(values) => {
-            console.log((values))
-            createCustomer(values).then(res => {
+            const apiToCall = initialValues?.custID != 0 ? updateCustomer : createCustomer
+            apiToCall(values).then(res => {
                 setOpened()
-                notifications.show({
+                initialValues?.custID != 0 ? notifications.show({
+                    message: `Customer #${initialValues?.custCode} was Updated`,
+                    title: "Customer Updated",
+                    autoClose: 2000,
+                }) : notifications.show({
                     message: "New Customer was added",
                     title: "Customer Added",
                     autoClose: 2000,
@@ -52,13 +58,13 @@ function CustomerForm({ initialValues, setOpened }) {
                     <TextField label='Address' name='address' />
                 </Grid.Col>
                 <Grid.Col span={2}>
-                    <ShowroomDropdown name="Showroom" />
-                </Grid.Col>
-                <Grid.Col span={2}>
                     <StateDropdown name="State" />
                 </Grid.Col>
                 <Grid.Col span={2}>
                     <CityDropdown name="City" stateFieldName={'stateID'} />
+                </Grid.Col>
+                <Grid.Col span={2}>
+                    <ShowroomDropdown name="Showroom" cityFieldName="cityID" />
                 </Grid.Col>
                 <Grid.Col span={2}>
                     <TextField name='mobNo' label='Mobile Number' />
@@ -75,7 +81,6 @@ function CustomerForm({ initialValues, setOpened }) {
                 <Grid.Col>
                     <Button type='submit'>Submit</Button>
                 </Grid.Col>
-
             </Grid>
         </Form>
     )

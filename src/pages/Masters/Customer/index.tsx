@@ -1,14 +1,18 @@
-import { Box, Button, Modal, Paper, Title } from "@mantine/core";
+import { Box, Button, CopyButton, Modal, Paper, Title } from "@mantine/core";
 import React from "react";
 import DataTable from "../../../components/common/DataTable";
-import { useGetAllCustomersQuery } from "../../../services/api/master/customerAPI";
+import { useGetAllCustomersQuery, useLazyGetCustomerByCustomerIDQuery, useDeleteCustomerMutation } from "../../../services/api/master/customerAPI";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useToggle } from "@mantine/hooks";
 import CustomerForm from "./CustomerForm";
+import ConfirmButton from "../../../components/common/ConfirmButton";
 const columnHelper = createColumnHelper();
 function Customer() {
   const { data } = useGetAllCustomersQuery();
+  const [getCustomerByCustomerID, { isLoading: isGetCustomerLoading, data: customerData }] = useLazyGetCustomerByCustomerIDQuery();
+  const [deleteCustomer] = useDeleteCustomerMutation()
   const [opened, setOpened] = useToggle();
+  const [editOpened, setEditOpened] = useToggle();
   return (
     <Paper p="lg">
       <Box
@@ -34,7 +38,13 @@ function Customer() {
               cell: (info) => info.getValue(),
             }),
             columnHelper.accessor("custCode", {
-              cell: (info) => info.getValue(),
+              cell: (info) => <CopyButton value={info.getValue()}>
+                {({ copied, copy }) => (
+                  <Button color={copied ? 'teal' : 'blue'} onClick={copy}>
+                    {copied ? 'Copied!' : info.getValue()}
+                  </Button>
+                )}
+              </CopyButton>,
             }),
             columnHelper.accessor("address", {
               cell: (info) => info.getValue(),
@@ -68,6 +78,21 @@ function Customer() {
             columnHelper.accessor("customerNumber", {
               cell: (info) => info.getValue(),
             }),
+            columnHelper.accessor("action", {
+              cell: (info) => (
+                <Box display={"flex"} sx={{ gap: 2 }}>
+                  <Button loading={isGetCustomerLoading} onClick={async () => {
+                    await getCustomerByCustomerID(info?.row?.original?.custID)
+                    await setEditOpened()
+                  }} >
+                    Edit
+                  </Button>
+                  <ConfirmButton label={"Delete"} variant="outline" color="red" onClick={(e) => {
+                    deleteCustomer(info?.row?.original?.custID)
+                  }} />
+                </Box>
+              ),
+            }),
           ]}
         />
       </Paper>
@@ -96,6 +121,17 @@ function Customer() {
             active: "Y",
             customerNumber: "",
           }}
+        />
+      </Modal>
+      <Modal
+        title="Edit Customer"
+        size={"lg"}
+        opened={editOpened}
+        onClose={setEditOpened}
+      >
+        <CustomerForm
+          setOpened={setEditOpened}
+          initialValues={{ ...customerData, State: { label: customerData?.stateName, value: `${customerData?.stateID}` }, City: { label: customerData?.cityName, value: `${customerData?.cityID}` }, Showroom: { label: customerData?.showroomName, value: `${customerData?.showroomID}` } }}
         />
       </Modal>
     </Paper>

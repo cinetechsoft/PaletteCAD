@@ -20,15 +20,15 @@ export const customerAPI = createApi({
             invalidatesTags: ["Customer"]
         }),
         updateCustomer: builder.mutation<Customer, Customer>({
-            query: (customerDetails) => ({ url: `/${customerDetails.custID}`, method: "POST", body: customerDetails }),
+            query: (customerDetails) => ({ url: `/${customerDetails.custID}`, method: "PUT", body: customerDetails }),
             invalidatesTags: ["Customer"]
         }),
         deleteCustomer: builder.mutation<Customer, string>({
-            query: (customerID) => ({ url: `/${customerID}`, method: "DELETE" }),
+            query: (customerID) => ({ url: `/?id=${customerID}`, method: "DELETE" }),
             invalidatesTags: ["Customer"]
 
         }),
     }),
 })
 
-export const { useGetAllCustomersQuery, useLazyGetCustomerByCustomerIDQuery, useCreateCustomerMutation } = customerAPI
+export const { useGetAllCustomersQuery, useLazyGetCustomerByCustomerIDQuery, useCreateCustomerMutation, useUpdateCustomerMutation, useDeleteCustomerMutation } = customerAPI

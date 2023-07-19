@@ -5,7 +5,7 @@ import { Form } from "../../../components/common/Form";
 import { useCreateinfluencerMutation } from "../../../services/api/master/influencerAPI";
 import { z } from "zod";
 import { notifications } from "@mantine/notifications";
-import InfluencerTypeDropdown from "../../../components/common/FormSpecific/InfluencerTypeDropdown";
+import InfluencerTypeDropdown from "../../../components/common/GenericDropdowns/InfluencerTypeDropdown";
 
 function InfluencerForm({ initialValues, setOpened }) {
   const [createInfluencer] = useCreateinfluencerMutation();

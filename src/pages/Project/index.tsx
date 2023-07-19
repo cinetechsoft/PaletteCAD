@@ -12,7 +12,7 @@ import AutoCompleteField from '../../components/common/Inputs/AutoCompleteField'
 import { useGetAllShowroomsQuery } from '../../services/api/master/showroomAPI';
 import { useGetAllCustomersQuery } from '../../services/api/master/customerAPI';
 import { useGetAllInfluencersQuery } from '../../services/api/master/influencerAPI';
-import ShowroomDropdown from '../../components/common/FormSpecific/ShowroomDropdown';
+import ShowroomDropdown from '../../components/common/GenericDropdowns/ShowroomDropdown';
 
 const useStyles = createStyles((theme) => ({
     title: {

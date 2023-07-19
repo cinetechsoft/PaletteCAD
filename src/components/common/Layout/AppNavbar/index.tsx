@@ -7,8 +7,8 @@ interface AppNavbarProps { opened: boolean; }
 const NavListItem = ({ route, opened }: { opened: boolean; route: RouteItem }) => {
     return opened ? (<Link to={route.path} key={route.name} style={{
         all: `unset`
-    }}> {route?.subRoutes ? route?.subRoutes.map(subRoute => <NavLink label={route.name} key={route.name} icon={<route.icon />} ><NavListItem route={subRoute} key={subRoute.name} /></NavLink>) : <NavLink label={route.name} key={route.name} icon={<route.icon />} />}
-    </Link>) : <Box m="8px 12px" display={'flex'}><route.icon style={{ minWidth: 24 }} /></Box>
+    }}> {route?.subRoutes ? <NavLink label={route.name} key={route.name} icon={<route.icon />} >{route?.subRoutes.map(subRoute => <NavListItem route={subRoute} key={subRoute.name} opened={opened} />)}</NavLink> : <NavLink label={route.name} key={route.name} icon={<route.icon />} />}
+    </Link>) : <Box m="8px 12px" display={'flex'} ><route.icon style={{ minWidth: 24 }} /></Box>
 }
 function AppNavbar({ opened }: AppNavbarProps) {
     const [isExpanded, { open, close }] = useDisclosure(false)

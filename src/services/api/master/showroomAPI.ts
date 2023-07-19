@@ -13,6 +13,9 @@ export const showroomAPI = createApi({
         getShowroomByshowroomID: builder.query<Showroom, string | unknown>({
             query: (showroomID) => `/${showroomID}`,
         }),
+        getAllShowroomsByCityID: builder.query<Showroom, string | unknown>({
+            query: (cityID) => `/?id=${cityID}`,
+        }),
         createshowroom: builder.mutation<Showroom, Showroom>({
             query: (showroomDetails) => ({ url: `/`, method: "POST", body: showroomDetails }),
         }),
@@ -25,4 +28,4 @@ export const showroomAPI = createApi({
     }),
 })
 
-export const { useGetAllShowroomsQuery, useLazyGetShowroomByshowroomIDQuery } = showroomAPI
+export const { useGetAllShowroomsQuery, useLazyGetShowroomByshowroomIDQuery, useLazyGetAllShowroomsByCityIDQuery } = showroomAPI
