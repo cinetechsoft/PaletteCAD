@@ -7,8 +7,8 @@ interface todo {
 
 type AllProjects = Array<{
   project_Id: number;
-  pVisibleNo: string;
-  prDate: Date;
+  projectVisibleNo: string;
+  projectDate: Date;
   version: string;
   custName: string;
   custAddress: string;

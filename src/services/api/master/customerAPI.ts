@@ -15,6 +15,9 @@ export const customerAPI = createApi({
         getCustomerByCustomerID: builder.query<Customer, string | unknown>({
             query: (customerID) => `/${customerID}`,
         }),
+        getCustomersByCustomerByShowroomID: builder.query<AllCustomers, string | unknown>({
+            query: (showroomID) => `/GetCustomersByShowroomId?ShowroomId=${showroomID}`,
+        }),
         createCustomer: builder.mutation<Customer, Customer>({
             query: (customerDetails) => ({ url: `/`, method: "POST", body: customerDetails }),
             invalidatesTags: ["Customer"]
@@ -31,4 +34,4 @@ export const customerAPI = createApi({
     }),
 })
 
-export const { useGetAllCustomersQuery, useLazyGetCustomerByCustomerIDQuery, useCreateCustomerMutation, useUpdateCustomerMutation, useDeleteCustomerMutation } = customerAPI
+export const { useGetAllCustomersQuery, useLazyGetCustomerByCustomerIDQuery, useCreateCustomerMutation, useUpdateCustomerMutation, useDeleteCustomerMutation, useLazyGetCustomersByCustomerByShowroomIDQuery } = customerAPI

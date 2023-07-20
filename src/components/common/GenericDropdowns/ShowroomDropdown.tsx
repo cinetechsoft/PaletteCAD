@@ -1,16 +1,20 @@
 import React, { useEffect } from 'react'
-import { useLazyGetAllShowroomsByCityIDQuery } from '../../../services/api/master/showroomAPI';
+import { useGetAllShowroomsQuery, useLazyGetAllShowroomsByCityIDQuery } from '../../../services/api/master/showroomAPI';
 import AutoCompleteField from '../Inputs/AutoCompleteField';
 import { useFormContext } from 'react-hook-form';
 
-function ShowroomDropdown({ name, cityFieldName }: { name: string; cityFieldName: string }) {
-    const [getAllShowroomsByCityID, { data: allShowrooms }] = useLazyGetAllShowroomsByCityIDQuery();
+function ShowroomDropdown({ name, cityFieldName }: { name: string; cityFieldName?: string }) {
+    const [getAllShowroomsByCityID, { data: allShowroomsByFilter }] = useLazyGetAllShowroomsByCityIDQuery();
+    const { data: allShowroomsWithoutFilter } = useGetAllShowroomsQuery();
+    const allShowrooms = !!cityFieldName ? allShowroomsByFilter : allShowroomsWithoutFilter
     const { getValues, watch, setValue } = useFormContext();
     useEffect(() => {
-        // setValue(name, { label: "", value: "" })
-        const cityID = getValues(cityFieldName)
-        getAllShowroomsByCityID(cityID)
-    }, [watch(cityFieldName)])
+        if (!!cityFieldName) {
+            // setValue(name, { label: "", value: "" })
+            const cityID = getValues(cityFieldName)
+            getAllShowroomsByCityID(cityID)
+        }
+    }, [watch(cityFieldName ?? "")])
 
     const onItemSelect = (item: Showroom) => {
         setValue('showroomID', item.showroomId)
