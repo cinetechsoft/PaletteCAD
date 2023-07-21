@@ -1,13 +1,24 @@
 import { Box, Button, Modal, Paper, Title } from "@mantine/core";
 import React from "react";
 import DataTable from "../../../components/common/DataTable";
-import { useGetAllInfluencersQuery } from "../../../services/api/master/influencerAPI";
+import {
+  useGetAllInfluencersQuery,
+  useLazyGetInfluencerByInfluencerIDQuery,
+  useDeleteInfluencerMutation,
+} from "../../../services/api/master/influencerAPI";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useToggle } from "@mantine/hooks";
 import InfluencerForm from "./InfluencerForm";
+import ConfirmButton from "../../../components/common/ConfirmButton";
 const columnHelper = createColumnHelper();
 function Influencer() {
   const { data } = useGetAllInfluencersQuery();
+  const [
+    getInfluencerByInfluencerID,
+    { isLoading: isGetInfluencerLoading, data: influencerData },
+  ] = useLazyGetInfluencerByInfluencerIDQuery();
+  const [deleteInfluencer] = useDeleteInfluencerMutation();
+  const [editOpened, setEditOpened] = useToggle();
   const [opened, setOpened] = useToggle();
   return (
     <Paper p="lg">
@@ -51,6 +62,31 @@ function Influencer() {
             columnHelper.accessor("influencerCode", {
               cell: (info) => info.getValue(),
             }),
+            columnHelper.accessor("action", {
+              cell: (info) => (
+                <Box display={"flex"} sx={{ gap: 2 }}>
+                  <Button
+                    loading={isGetInfluencerLoading}
+                    onClick={async () => {
+                      await getInfluencerByInfluencerID(
+                        info?.row?.original?.influencer_Mast_id
+                      );
+                      await setEditOpened();
+                    }}
+                  >
+                    Edit
+                  </Button>
+                  <ConfirmButton
+                    label={"Delete"}
+                    variant="outline"
+                    color="red"
+                    onClick={(e) => {
+                      deleteInfluencer(info?.row?.original?.influencer_Mast_id);
+                    }}
+                  />
+                </Box>
+              ),
+            }),
           ]}
         />
       </Paper>
@@ -72,6 +108,23 @@ function Influencer() {
             mob_No: "",
             email_id: "",
             influencerCode: "",
+          }}
+        />
+      </Modal>
+      <Modal
+        title="Edit Influencer"
+        size={"lg"}
+        opened={editOpened}
+        onClose={setEditOpened}
+      >
+        <InfluencerForm
+          setOpened={setEditOpened}
+          initialValues={{
+            ...influencerData,
+            InfluencerType: {
+              label: influencerData?.influencerType_Name,
+              value: `${influencerData?.influencerType_id}`,
+            },
           }}
         />
       </Modal>

@@ -29,14 +29,14 @@ export const influencerTypeAPI = createApi({
     updateinfluencerType: builder.mutation<Influencer, Influencer>({
       query: (influencerTypeDetails) => ({
         url: `/${influencerTypeDetails.influencer_Mast_id}`,
-        method: "POST",
+        method: "PUT",
         body: influencerTypeDetails,
       }),
       invalidatesTags: ["InfluencerType"],
     }),
     deleteinfluencerType: builder.mutation<Influencer, string>({
       query: (influencerTypeID) => ({
-        url: `/${influencerTypeID}`,
+        url: `/?id=${influencerTypeID}`,
         method: "DELETE",
       }),
       invalidatesTags: ["InfluencerType"],
@@ -48,4 +48,6 @@ export const {
   useGetAllInfluencerTypesQuery,
   useLazyGetInfluencerTypeByinfluencerTypeIDQuery,
   useCreateinfluencerTypeMutation,
+  useUpdateinfluencerTypeMutation,
+  useDeleteinfluencerTypeMutation,
 } = influencerTypeAPI;

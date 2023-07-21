@@ -12,10 +12,10 @@ export const influencerAPI = createApi({
       query: () => `/`,
       providesTags: ["Influencer"],
     }),
-    getInfluencerByinfluencerID: builder.query<Influencer, string | unknown>({
+    getInfluencerByInfluencerID: builder.query<Influencer, string | unknown>({
       query: (influencerID) => `/${influencerID}`,
     }),
-    createinfluencer: builder.mutation<Influencer, Influencer>({
+    createInfluencer: builder.mutation<Influencer, Influencer>({
       query: (influencerDetails) => ({
         url: `/`,
         method: "POST",
@@ -23,16 +23,19 @@ export const influencerAPI = createApi({
       }),
       invalidatesTags: ["Influencer"],
     }),
-    updateinfluencer: builder.mutation<Influencer, Influencer>({
+    updateInfluencer: builder.mutation<Influencer, Influencer>({
       query: (influencerDetails) => ({
         url: `/${influencerDetails.influencer_Mast_id}`,
-        method: "POST",
+        method: "PUT",
         body: influencerDetails,
       }),
       invalidatesTags: ["Influencer"],
     }),
-    deleteinfluencer: builder.mutation<Influencer, string>({
-      query: (influencerID) => ({ url: `/${influencerID}`, method: "DELETE" }),
+    deleteInfluencer: builder.mutation<Influencer, string>({
+      query: (influencerID) => ({
+        url: `/?id=${influencerID}`,
+        method: "DELETE",
+      }),
       invalidatesTags: ["Influencer"],
     }),
   }),
@@ -40,6 +43,8 @@ export const influencerAPI = createApi({
 
 export const {
   useGetAllInfluencersQuery,
-  useLazyGetInfluencerByinfluencerIDQuery,
-  useCreateinfluencerMutation,
+  useLazyGetInfluencerByInfluencerIDQuery,
+  useCreateInfluencerMutation,
+  useUpdateInfluencerMutation,
+  useDeleteInfluencerMutation,
 } = influencerAPI;
