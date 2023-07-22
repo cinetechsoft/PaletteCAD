@@ -58,6 +58,12 @@ const routes: RouteItem[] = [
         element: LazyLoaded.InfluencerTypePage,
         icon: IconProgress,
       },
+      {
+        name: "Designation",
+        path: "/designation",
+        element: LazyLoaded.DesignationPage,
+        icon: IconProgress,
+      },
     ],
   },
 ];

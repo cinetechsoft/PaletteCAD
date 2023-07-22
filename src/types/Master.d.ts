@@ -88,3 +88,13 @@ interface InfluencerType {
 }
 
 type getAllInfluencerTypes = InfluencerType[];
+
+interface Designation {
+  designationId: number;
+  designationCode: string;
+  designation: string;
+  rank: number;
+  maxDiscountAllowed: number;
+  allowtoChangeQuotStatus: string;
+}
+type getAllDesignation = Designation[];
