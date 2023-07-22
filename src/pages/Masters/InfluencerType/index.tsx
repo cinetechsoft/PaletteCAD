@@ -48,9 +48,10 @@ function InfluencerType() {
             columnHelper.accessor("percentDiscountMarkup", {
               cell: (info) => info.getValue(),
             }),
-            columnHelper.accessor("active", {
-              cell: (info) => info.getValue(),
-            }),
+
+            // columnHelper.accessor("active", {
+            //   cell: (info) => info.getValue(),
+            // }),
             columnHelper.accessor("action", {
               cell: (info) => (
                 <Box display={"flex"} sx={{ gap: 2 }}>

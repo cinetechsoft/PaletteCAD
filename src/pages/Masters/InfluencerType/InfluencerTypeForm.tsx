@@ -11,6 +11,7 @@ import { notifications } from "@mantine/notifications";
 import NumberField from "../../../components/common/Inputs/NumberField";
 
 function InfluencerTypeForm({ initialValues, setOpened }) {
+  console.log(initialValues);
   const [createInfluencerType] = useCreateinfluencerTypeMutation();
   const [updateInfluencerType] = useUpdateinfluencerTypeMutation();
   return (
@@ -25,12 +26,12 @@ function InfluencerTypeForm({ initialValues, setOpened }) {
       onSubmit={(values) => {
         console.log(values);
         const apiToCall =
-          initialValues?.custID != 0
+          initialValues?.influencerType_id != 0
             ? updateInfluencerType
             : createInfluencerType;
         apiToCall(values).then((res) => {
           setOpened();
-          initialValues?.custID != 0
+          initialValues?.influencerType_id != 0
             ? notifications.show({
                 message: `InfluencerType #${initialValues?.influencerType_Name} was Updated`,
                 title: "InfluencerType Updated",
