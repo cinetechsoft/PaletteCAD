@@ -11,3 +11,4 @@ export const DesignationPage = React.lazy(
 export const InfluencerTypePage = React.lazy(
   () => import("./Masters/InfluencerType")
 );
+export const ItemPage = React.lazy(() => import("./Masters/Item"));

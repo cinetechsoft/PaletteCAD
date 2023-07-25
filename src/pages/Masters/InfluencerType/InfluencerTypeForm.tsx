@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import TextField from "../../../components/common/Inputs/TextField";
 import { Form } from "../../../components/common/Form";
 import {
-  useCreateinfluencerTypeMutation,
-  useUpdateinfluencerTypeMutation,
+  useCreateInfluencerTypeMutation,
+  useUpdateInfluencerTypeMutation,
 } from "../../../services/api/master/influencerTypeAPI";
 import { z } from "zod";
 import { notifications } from "@mantine/notifications";
@@ -12,8 +12,8 @@ import NumberField from "../../../components/common/Inputs/NumberField";
 
 function InfluencerTypeForm({ initialValues, setOpened }) {
   console.log(initialValues);
-  const [createInfluencerType] = useCreateinfluencerTypeMutation();
-  const [updateInfluencerType] = useUpdateinfluencerTypeMutation();
+  const [createInfluencerType] = useCreateInfluencerTypeMutation();
+  const [updateInfluencerType] = useUpdateInfluencerTypeMutation();
   return (
     <Form
       initialValues={initialValues}

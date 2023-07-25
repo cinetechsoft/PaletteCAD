@@ -33,6 +33,12 @@ const routes: RouteItem[] = [
     element: LazyLoaded.ProjectPage,
     icon: IconProgress,
   },
+  {
+    name: "Item",
+    path: "/item",
+    element: LazyLoaded.ItemPage,
+    icon: IconProgress,
+  },
 
   {
     name: "Master",

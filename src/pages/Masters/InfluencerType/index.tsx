@@ -3,9 +3,8 @@ import React from "react";
 import DataTable from "../../../components/common/DataTable";
 import {
   useGetAllInfluencerTypesQuery,
-  useDeleteinfluencerTypeMutation,
-  useUpdateinfluencerTypeMutation,
-  useLazyGetInfluencerTypeByinfluencerTypeIDQuery,
+  useDeleteInfluencerTypeMutation,
+  useLazyGetInfluencerTypeByInfluencerTypeIDQuery,
 } from "../../../services/api/master/influencerTypeAPI";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useToggle } from "@mantine/hooks";
@@ -17,8 +16,8 @@ function InfluencerType() {
   const [
     getInfluencerTypeByInfluencerTypeID,
     { isLoading: isGetInfluencerTypeLoading, data: influecerTypeData },
-  ] = useLazyGetInfluencerTypeByinfluencerTypeIDQuery();
-  const [deleteInfluencerType] = useDeleteinfluencerTypeMutation();
+  ] = useLazyGetInfluencerTypeByInfluencerTypeIDQuery();
+  const [deleteInfluencerType] = useDeleteInfluencerTypeMutation();
   const [editOpened, setEditOpened] = useToggle();
   const [opened, setOpened] = useToggle();
   return (

@@ -98,3 +98,52 @@ interface Designation {
   allowtoChangeQuotStatus: string;
 }
 type getAllDesignation = Designation[];
+
+interface Item {
+  itemId: number;
+  itemName: string;
+  itemVisibleNo: string;
+  salesItemCode: string;
+  articleCode: string;
+  salesCode: string;
+  venderCode: string;
+  itemGroupId: number;
+  itemGroup: string;
+  itemGroupId1: number;
+  itemGroup1: string;
+  itemGroupId2: number;
+  itemGroup2: string;
+  unitId: number;
+  unit: string;
+  hsnCode: string;
+  itemDescription: string;
+  productId: number;
+  productName: string;
+  brandId: number;
+  brandName: string;
+  edgeBandColorId: number;
+  edgeBandColor: string;
+  thicknessInMMId: number;
+  thicknessInMM: string;
+  width: number;
+  length: number;
+}
+type getAllItems = Item[];
+
+interface ItemGroup {
+  itemGroupId: number;
+  itemGroup: string;
+}
+type getItemGroups = ItemGroup[];
+
+interface ItemGroup1 {
+  itemGroupId1: number;
+  itemGroup1: string;
+}
+type getItemGroups1 = ItemGroup1[];
+
+interface ItemGroup2 {
+  itemGroupId2: number;
+  itemGroup2: string;
+}
+type getItemGroups2 = ItemGroup2[];
