@@ -6,7 +6,7 @@ import { useFormContext } from "react-hook-form";
 function ThicknessDropdown({ name }: { name: string }) {
   const { data: allItemGroups } = useGetThicknessQuery();
   const { setValue } = useFormContext();
-  const onItemSelect = (item: Item) => {
+  const onItemSelect = (item: Thickness) => {
     setValue("thicknessInMMId", item.thicknessInMMId);
     setValue("thicknessInMM", item.thicknessInMM);
   };

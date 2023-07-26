@@ -6,7 +6,7 @@ import { useFormContext } from "react-hook-form";
 function BrandDropdown({ name }: { name: string }) {
   const { data: allItemGroups } = useGetBrandsQuery();
   const { setValue } = useFormContext();
-  const onItemSelect = (item: Item) => {
+  const onItemSelect = (item: Brand) => {
     setValue("brandId", item.brandId);
     setValue("brandName", item.brandName);
   };

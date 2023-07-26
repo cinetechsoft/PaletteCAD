@@ -147,3 +147,33 @@ interface ItemGroup2 {
   itemGroup2: string;
 }
 type getItemGroups2 = ItemGroup2[];
+
+interface EdgeBandColor {
+  edgeBandColorId: number;
+  edgeBandColor: string;
+}
+type getEdgeBandColors = EdgeBandColor[];
+
+interface Thickness {
+  thicknessInMMId: number;
+  thicknessInMM: string;
+}
+type getThickness = Thickness[];
+
+interface Product {
+  productId: number;
+  product: string;
+}
+type getProducts = Product[];
+
+interface Brand {
+  brandId: number;
+  brand: string;
+}
+type getBrands = Brand[];
+
+interface Unit {
+  unitId: number;
+  unit: string;
+}
+type getUnits = Unit[];

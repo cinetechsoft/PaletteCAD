@@ -6,7 +6,7 @@ import { useFormContext } from "react-hook-form";
 function ItemGroupsDropdown({ name }: { name: string }) {
   const { data: allItemGroups } = useGetItemGroupsQuery();
   const { setValue } = useFormContext();
-  const onItemSelect = (item: Item) => {
+  const onItemSelect = (item: ItemGroup) => {
     setValue("itemGroupId", item.itemGroupId);
     setValue("itemGroup", item.itemGroup);
   };

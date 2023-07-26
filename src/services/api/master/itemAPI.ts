@@ -12,34 +12,40 @@ export const itemAPI = createApi({
       query: () => `/`,
       providesTags: ["Item"],
     }),
-    getItemGroups: builder.query<Item, string | unknown>({
+    getItemGroups: builder.query<ItemGroup, string | unknown>({
       query: () => `/GetItemGroups`,
     }),
-    getBrands: builder.query<Item, string | unknown>({
+    getBrands: builder.query<Brand, string | unknown>({
       query: () => `/GetBrand`,
     }),
-    getProducts: builder.query<Item, string | unknown>({
+    getProducts: builder.query<Product, string | unknown>({
       query: () => `/GetProduct`,
     }),
-    getColorShades: builder.query<Item, string | unknown>({
+    getColorShades: builder.query<EdgeBandColor, string | unknown>({
       query: () => `/GetEdgeBandColor`,
     }),
-    getUnits: builder.query<Item, string | unknown>({
+    getUnits: builder.query<Unit, string | unknown>({
       query: () => `/GetUnit`,
     }),
-    getThickness: builder.query<Item, string | unknown>({
+    getThickness: builder.query<Thickness, string | unknown>({
       query: () => `/GetThickness`,
     }),
     getItemByItemID: builder.query<Item, string | unknown>({
       query: (ItemID) => `/${ItemID}`,
     }),
-    getItemGroupsByItemGroupIdLevel1: builder.query<Item, string | unknown>({
+    getItemGroupsByItemGroupIdLevel1: builder.query<
+      ItemGroup1,
+      string | unknown
+    >({
       query: (ItemGroupId) =>
         `/GetItemGroupsByItemGroupIdLevel1?itemGroupId=${ItemGroupId}`,
     }),
-    getItemGroupsByItemGroupIdLevel2: builder.query<Item, string | unknown>({
-      query: (ItemGroupId1) =>
-        `/GetItemGroupsByItemGroupIdLevel2?itemGroupId=${ItemGroupId1}`,
+    getItemGroupsByItemGroupIdLevel2: builder.query<
+      ItemGroup2,
+      string | unknown
+    >({
+      query: (ItemGroupId2) =>
+        `/GetItemGroupsByItemGroupIdLevel2?itemGroupId=${ItemGroupId2}`,
     }),
 
     createItem: builder.mutation<Item, Item>({
@@ -52,7 +58,7 @@ export const itemAPI = createApi({
     }),
     updateItem: builder.mutation<Item, Item>({
       query: (ItemDetails) => ({
-        url: `/${ItemDetails.itemid}`,
+        url: `/${ItemDetails.itemId}`,
         method: "PUT",
         body: ItemDetails,
       }),
@@ -60,7 +66,7 @@ export const itemAPI = createApi({
     }),
     deleteItem: builder.mutation<Item, string>({
       query: (ItemID) => ({
-        url: `/?id=${ItemID}`,
+        url: `/${ItemID}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Item"],

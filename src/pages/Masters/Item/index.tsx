@@ -4,7 +4,6 @@ import DataTable from "../../../components/common/DataTable";
 import {
   useGetAllItemsQuery,
   useDeleteItemMutation,
-  useUpdateItemMutation,
   useLazyGetItemByItemIDQuery,
 } from "../../../services/api/master/ItemAPI";
 import { createColumnHelper } from "@tanstack/react-table";
@@ -128,10 +127,33 @@ function Item() {
         <ItemForm
           setOpened={setOpened}
           initialValues={{
-            Item_id: 0,
-            Item_Name: "",
-            percentDiscountMarkup: 0,
-            active: "Y",
+            itemId: 0,
+            itemName: "",
+            itemVisibleNo: "",
+            salesItemCode: "",
+            articleCode: "",
+            salesCode: "",
+            venderCode: "",
+            itemGroupId: 0,
+            itemGroup: "",
+            itemGroupId1: 0,
+            itemGroup1: "",
+            itemGroupId2: 0,
+            itemGroup2: "",
+            unitId: 0,
+            unit: "",
+            hsnCode: "",
+            itemDescription: "",
+            productId: 0,
+            productName: "",
+            brandId: 0,
+            brandName: "",
+            edgeBandColorId: 0,
+            edgeBandColor: "",
+            thicknessInMMId: 0,
+            thicknessInMM: "",
+            width: 0,
+            length: 0,
           }}
         />
       </Modal>
@@ -145,6 +167,38 @@ function Item() {
           setOpened={setEditOpened}
           initialValues={{
             ...itemData,
+            ItemGroup: {
+              lable: itemData?.itemGroup,
+              value: `${itemData?.itemGroupId}`,
+            },
+            ItemGroup1: {
+              lable: itemData?.itemGroup1,
+              value: `${itemData?.itemGroupId1}`,
+            },
+            ItemGroup2: {
+              lable: itemData?.itemGroup2,
+              value: `${itemData?.itemGroupId2}`,
+            },
+            Product: {
+              lable: itemData?.productName,
+              value: `${itemData?.productId}`,
+            },
+            Brand: {
+              lable: itemData?.brandName,
+              value: `${itemData?.brandId}`,
+            },
+            Thickness: {
+              lable: itemData?.thicknessInMM,
+              value: `${itemData?.thicknessInMMId}`,
+            },
+            EdgeBandColor: {
+              lable: itemData?.edgeBandColor,
+              value: `${itemData?.edgeBandColorId}`,
+            },
+            Unit: {
+              lable: itemData?.unit,
+              value: `${itemData?.unitId}`,
+            },
           }}
         />
       </Modal>

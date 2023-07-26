@@ -19,7 +19,7 @@ function SubItemGroupsDropdown({
     getItemGroupsLevel1(ItemGroupId);
   }, [watch(ItemGroupFieldName)]);
 
-  const onItemSelect = (item: Item) => {
+  const onItemSelect = (item: ItemGroup1) => {
     setValue("itemGroupId1", item.itemGroupId1);
     setValue("itemGroup1", item.itemGroup1);
   };

@@ -6,7 +6,7 @@ import { useFormContext } from "react-hook-form";
 function ColorShadeDropdown({ name }: { name: string }) {
   const { data: allItemGroups } = useGetColorShadesQuery();
   const { setValue } = useFormContext();
-  const onItemSelect = (item: Item) => {
+  const onItemSelect = (item: EdgeBandColor) => {
     setValue("edgeBandColorId", item.edgeBandColorId);
     setValue("edgeBandColor", item.edgeBandColor);
   };

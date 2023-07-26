@@ -17,6 +17,7 @@ import ThicknessDropdown from "../../../components/common/GenericDropdowns/Thick
 import ProductDropdown from "../../../components/common/GenericDropdowns/ProductDropdown";
 import BrandDropdown from "../../../components/common/GenericDropdowns/BrandDropdown";
 import UnitDropdown from "../../../components/common/GenericDropdowns/UnitDropdown";
+import TextAreaField from "../../../components/common/Inputs/TextAreaField";
 
 function ItemForm({ initialValues, setOpened }) {
   console.log(initialValues);
@@ -56,12 +57,12 @@ function ItemForm({ initialValues, setOpened }) {
       })}
       onSubmit={(values) => {
         console.log(values);
-        const apiToCall = initialValues?.itemid != 0 ? updateItem : createItem;
+        const apiToCall = initialValues?.itemId != 0 ? updateItem : createItem;
         apiToCall(values).then((res) => {
           setOpened();
-          initialValues?.itemid != 0
+          initialValues?.itemId != 0
             ? notifications.show({
-                message: `Item #${initialValues?.Item_Name} was Updated`,
+                message: `Item #${initialValues?.itemName} was Updated`,
                 title: "Item Updated",
                 autoClose: 2000,
               })
@@ -75,41 +76,44 @@ function ItemForm({ initialValues, setOpened }) {
     >
       <Grid columns={4}>
         <Grid.Col span={2}>
+          <TextField label="Visible No." name="itemVisibleNo" />
+        </Grid.Col>
+        <Grid.Col span={2}>
           <TextField label="Article Code" name="articleCode" />
         </Grid.Col>
         <Grid.Col span={2}>
-          <TextField label="Sales item Code" name="salesItemcode" />
+          <TextField label="Sales item Code" name="salesItemCode" />
         </Grid.Col>
 
         <Grid.Col span={2}>
           <TextField label="Manufacturing Code" name="salesCode" />
         </Grid.Col>
         <Grid.Col span={2}>
-          <TextField label="Vendor Code" name="vendorCode" />
+          <TextField label="Vendor Code" name="venderCode" />
         </Grid.Col>
         <Grid.Col span={2}>
           <TextField label="Item" name="itemName" />
         </Grid.Col>
         <Grid.Col span={2}>
-          <ItemGroupsDropdown name="itemGroup" />
+          <ItemGroupsDropdown name="ItemGroup" />
         </Grid.Col>
         <Grid.Col span={2}>
           <SubItemGroupsDropdown
-            name="itemGroup1"
+            name="ItemGroup1"
             ItemGroupFieldName="itemGroupId"
           />
         </Grid.Col>
         <Grid.Col span={2}>
           <SubsubItemGroupsDropdown
-            name="itemGroup2"
+            name="ItemGroup2"
             ItemGroup1FieldName="itemGroupId1"
           />
         </Grid.Col>
         <Grid.Col span={2}>
-          <ColorShadeDropdown name="edgeBandColor" />
+          <ColorShadeDropdown name="EdgeBandColor" />
         </Grid.Col>
         <Grid.Col span={2}>
-          <ThicknessDropdown name="thicknessInMM" />
+          <ThicknessDropdown name="Thickness" />
         </Grid.Col>
 
         <Grid.Col span={2}>
@@ -120,18 +124,20 @@ function ItemForm({ initialValues, setOpened }) {
         </Grid.Col>
 
         <Grid.Col span={2}>
-          <ProductDropdown name="productName" />
+          <ProductDropdown name="Product" />
         </Grid.Col>
         <Grid.Col span={2}>
-          <BrandDropdown name="brandName" />
+          <BrandDropdown name="Brand" />
         </Grid.Col>
         <Grid.Col span={2}>
-          <UnitDropdown name="unit" />
+          <UnitDropdown name="Unit" />
         </Grid.Col>
         <Grid.Col span={2}>
-          <NumberField label="HSN Code" name="hsnCode" />
+          <TextField label="HSN Code" name="hsnCode" />
         </Grid.Col>
-
+        <Grid.Col span={2}>
+          <TextAreaField label="Description" name="itemDescription" />
+        </Grid.Col>
         <Grid.Col>
           <Button type="submit">Submit</Button>
         </Grid.Col>
