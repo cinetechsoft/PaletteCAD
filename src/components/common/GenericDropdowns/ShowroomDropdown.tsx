@@ -18,6 +18,7 @@ function ShowroomDropdown({ name, cityFieldName }: { name: string; cityFieldName
 
     const onItemSelect = (item: Showroom) => {
         setValue('showroomID', item.showroomId)
+        setValue('showroomId', item.showroomId)
         setValue('showroomName', item.showroomName)
     }
     return (

@@ -1,25 +1,25 @@
-import { Box, Button, Modal, Paper, Title } from "@mantine/core";
+import { Box, Button, CopyButton, Modal, Paper, Title } from "@mantine/core";
 import React from "react";
 import DataTable from "../../../components/common/DataTable";
 import {
-  useGetAllInfluencersQuery,
-  useLazyGetInfluencerByInfluencerIDQuery,
-  useDeleteInfluencerMutation,
-} from "../../../services/api/master/influencerAPI";
+  useGetAllDesignationsQuery,
+  useLazyGetDesignationByDesignationIDQuery,
+  useDeleteDesignationMutation,
+} from "../../../services/api/master/designationAPI";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useToggle } from "@mantine/hooks";
-import InfluencerForm from "./InfluencerForm";
+import DesignationForm from "./DesignationForm";
 import ConfirmButton from "../../../components/common/ConfirmButton";
 const columnHelper = createColumnHelper();
-function Influencer() {
-  const { data } = useGetAllInfluencersQuery();
+function Designation() {
+  const { data } = useGetAllDesignationsQuery();
   const [
-    getInfluencerByInfluencerID,
-    { isLoading: isGetInfluencerLoading, data: influencerData },
-  ] = useLazyGetInfluencerByInfluencerIDQuery();
-  const [deleteInfluencer] = useDeleteInfluencerMutation();
-  const [editOpened, setEditOpened] = useToggle();
+    getDesignationByDesignationID,
+    { isLoading: isGetDesignationLoading, data: designationData },
+  ] = useLazyGetDesignationByDesignationIDQuery();
+  const [deleteDesignation] = useDeleteDesignationMutation();
   const [opened, setOpened] = useToggle();
+  const [editOpened, setEditOpened] = useToggle();
   return (
     <Paper p="lg">
       <Box
@@ -30,7 +30,7 @@ function Influencer() {
         }}
         mb={"lg"}
       >
-        <Title size="h3">Influencers</Title>
+        <Title size="h3">Designations</Title>
         <Button onClick={() => setOpened()}>Add</Button>
       </Box>
 
@@ -38,38 +38,32 @@ function Influencer() {
         <DataTable
           data={data ?? []}
           columns={[
-            columnHelper.accessor("influencer_Mast_id", {
+            columnHelper.accessor("designationId", {
               cell: (info) => info.getValue(),
             }),
-            columnHelper.accessor("influencerType_id", {
+            columnHelper.accessor("designationCode", {
               cell: (info) => info.getValue(),
             }),
-            columnHelper.accessor("influencerType_Name", {
+            columnHelper.accessor("designation", {
               cell: (info) => info.getValue(),
             }),
-            columnHelper.accessor("firm_Name", {
+            columnHelper.accessor("rank", {
               cell: (info) => info.getValue(),
             }),
-            columnHelper.accessor("address", {
+            columnHelper.accessor("maxDiscountAllowed", {
               cell: (info) => info.getValue(),
             }),
-            columnHelper.accessor("mob_No", {
-              cell: (info) => info.getValue(),
-            }),
-            columnHelper.accessor("email_id", {
-              cell: (info) => info.getValue(),
-            }),
-            columnHelper.accessor("influencerCode", {
+            columnHelper.accessor("allowtoChangeQuotStatus", {
               cell: (info) => info.getValue(),
             }),
             columnHelper.accessor("action", {
               cell: (info) => (
                 <Box display={"flex"} sx={{ gap: 2 }}>
                   <Button
-                    loading={isGetInfluencerLoading}
+                    loading={isGetDesignationLoading}
                     onClick={async () => {
-                      await getInfluencerByInfluencerID(
-                        info?.row?.original?.influencer_Mast_id
+                      await getDesignationByDesignationID(
+                        info?.row?.original?.designationId
                       );
                       await setEditOpened();
                     }}
@@ -81,7 +75,7 @@ function Influencer() {
                     variant="outline"
                     color="red"
                     onClick={(e) => {
-                      deleteInfluencer(info?.row?.original?.influencer_Mast_id);
+                      deleteDesignation(info?.row?.original?.designationId);
                     }}
                   />
                 </Box>
@@ -91,40 +85,33 @@ function Influencer() {
         />
       </Paper>
       <Modal
-        title="Add Influencer"
+        title="Add Designation"
         size={"lg"}
         opened={opened}
         onClose={setOpened}
       >
-        <InfluencerForm
+        <DesignationForm
           setOpened={setOpened}
           initialValues={{
-            influencer_Mast_id: 0,
-            influencerType_id: 0,
-            influencerType_Name: "",
-            firm_Name: "",
-            influencer_Name: "",
-            address: "",
-            mob_No: "",
-            email_id: "",
-            influencerCode: "",
+            designationId: 0,
+            designationCode: "",
+            designation: "",
+            rank: 0,
+            maxDiscountAllowed: 0,
+            allowtoChangeQuotStatus: "",
           }}
         />
       </Modal>
       <Modal
-        title="Edit Influencer"
+        title="Edit Designation"
         size={"lg"}
         opened={editOpened}
         onClose={setEditOpened}
       >
-        <InfluencerForm
+        <DesignationForm
           setOpened={setEditOpened}
           initialValues={{
-            ...influencerData,
-            InfluencerType: {
-              label: influencerData?.influencerType_Name,
-              value: `${influencerData?.influencerType_id}`,
-            },
+            ...designationData,
           }}
         />
       </Modal>
@@ -132,4 +119,4 @@ function Influencer() {
   );
 }
 
-export default Influencer;
+export default Designation;

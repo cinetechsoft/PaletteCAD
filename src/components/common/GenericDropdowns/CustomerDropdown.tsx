@@ -19,7 +19,13 @@ function CustomerDropdown({ name, showroomID }: { name: string; showroomID: stri
                 Object.keys(res.data).forEach(e => {
                     setValue(e, res?.data?.[e])
                 })
+                setValue('custAddress', res?.data?.address)
+                setValue('custContactNo', res?.data?.customerNumber)
+                setValue('custContactPer', res?.data?.contactPerson)
+                setValue('custId', res?.data?.custID)
+
             }
+
         })
     }
     return (

@@ -91,6 +91,7 @@ interface InfluencerType {
 
 type getAllInfluencerTypes = InfluencerType[];
 
+
 interface Room {
   roomId: number;
   roomVisibleNo:string
@@ -100,3 +101,93 @@ interface Room {
 }
 
 type AllRooms = Room[];
+
+interface Designation {
+  designationId: number;
+  designationCode: string;
+  designation: string;
+  rank: number;
+  maxDiscountAllowed: number;
+  allowtoChangeQuotStatus: string;
+}
+type getAllDesignation = Designation[];
+
+interface Item {
+  itemId: number;
+  itemName: string;
+  itemVisibleNo: string;
+  salesItemCode: string;
+  articleCode: string;
+  salesCode: string;
+  venderCode: string;
+  itemGroupId: number;
+  itemGroup: string;
+  itemGroupId1: number;
+  itemGroup1: string;
+  itemGroupId2: number;
+  itemGroup2: string;
+  unitId: number;
+  unit: string;
+  hsnCode: string;
+  itemDescription: string;
+  productId: number;
+  productName: string;
+  brandId: number;
+  brandName: string;
+  edgeBandColorId: number;
+  edgeBandColor: string;
+  thicknessInMMId: number;
+  thicknessInMM: string;
+  width: number;
+  length: number;
+}
+type getAllItems = Item[];
+
+interface ItemGroup {
+  itemGroupId: number;
+  itemGroup: string;
+}
+type getItemGroups = ItemGroup[];
+
+interface ItemGroup1 {
+  itemGroupId1: number;
+  itemGroup1: string;
+}
+type getItemGroups1 = ItemGroup1[];
+
+interface ItemGroup2 {
+  itemGroupId2: number;
+  itemGroup2: string;
+}
+type getItemGroups2 = ItemGroup2[];
+
+interface EdgeBandColor {
+  edgeBandColorId: number;
+  edgeBandColor: string;
+}
+type getEdgeBandColors = EdgeBandColor[];
+
+interface Thickness {
+  thicknessInMMId: number;
+  thicknessInMM: string;
+}
+type getThickness = Thickness[];
+
+interface Product {
+  productId: number;
+  product: string;
+}
+type getProducts = Product[];
+
+interface Brand {
+  brandId: number;
+  brand: string;
+}
+type getBrands = Brand[];
+
+interface Unit {
+  unitId: number;
+  unit: string;
+}
+type getUnits = Unit[];
+

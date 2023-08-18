@@ -2,13 +2,18 @@ import { Button, Grid } from "@mantine/core";
 import React, { useEffect } from "react";
 import TextField from "../../../components/common/Inputs/TextField";
 import { Form } from "../../../components/common/Form";
-import { useCreateinfluencerTypeMutation } from "../../../services/api/master/influencerTypeAPI";
+import {
+  useCreateInfluencerTypeMutation,
+  useUpdateInfluencerTypeMutation,
+} from "../../../services/api/master/influencerTypeAPI";
 import { z } from "zod";
 import { notifications } from "@mantine/notifications";
 import NumberField from "../../../components/common/Inputs/NumberField";
 
 function InfluencerTypeForm({ initialValues, setOpened }) {
-  const [createInfluencerType] = useCreateinfluencerTypeMutation();
+  console.log(initialValues);
+  const [createInfluencerType] = useCreateInfluencerTypeMutation();
+  const [updateInfluencerType] = useUpdateInfluencerTypeMutation();
   return (
     <Form
       initialValues={initialValues}
@@ -20,13 +25,23 @@ function InfluencerTypeForm({ initialValues, setOpened }) {
       })}
       onSubmit={(values) => {
         console.log(values);
-        createInfluencerType(values).then((res) => {
+        const apiToCall =
+          initialValues?.influencerType_id != 0
+            ? updateInfluencerType
+            : createInfluencerType;
+        apiToCall(values).then((res) => {
           setOpened();
-          notifications.show({
-            message: "New InfluencerType was added",
-            title: "InfluencerType Added",
-            autoClose: 2000,
-          });
+          initialValues?.influencerType_id != 0
+            ? notifications.show({
+                message: `InfluencerType #${initialValues?.influencerType_Name} was Updated`,
+                title: "InfluencerType Updated",
+                autoClose: 2000,
+              })
+            : notifications.show({
+                message: "New InfluencerType was added",
+                title: "InfluencerType Added",
+                autoClose: 2000,
+              });
         });
       }}
     >

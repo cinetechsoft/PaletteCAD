@@ -11,9 +11,10 @@ import { useGetAllInfluencersQuery } from '../../services/api/master/influencerA
 import { useCreateProjectMutation } from '../../services/api/projectAPI'
 import CustomerDropdown from '../../components/common/GenericDropdowns/CustomerDropdown'
 import ProjectCustomerDetails from './ProjectCustomerDetails'
+import InfluencerDropdown from '../../components/common/GenericDropdowns/InfluencerDropdown'
 
 function ProjectForm({ initialValues, setOpened }) {
-    const { data: allCustomers } = useGetAllCustomersQuery();
+    
     const { data: allInfluencers } = useGetAllInfluencersQuery();
     const [createProject] = useCreateProjectMutation()
     return (
@@ -93,7 +94,7 @@ function ProjectForm({ initialValues, setOpened }) {
                     <CustomerDropdown name={'customerSelect'} showroomID='showroomID' />
                 </Grid.Col>
                 <Grid.Col span={1}>
-                    <AutoCompleteField label="Influencer" name={'influencer'} data={allInfluencers?.map(e => ({ ...e, value: `${e.influencer_Mast_id}`, label: `${e.influencer_Name}` })) ?? []} />
+                    <InfluencerDropdown name={'influencer'} />
                 </Grid.Col>
                 <Grid.Col>
                     <Button type='submit'>Submit</Button>

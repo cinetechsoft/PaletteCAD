@@ -2,13 +2,24 @@ import { Button, Grid } from "@mantine/core";
 import React, { useEffect } from "react";
 import TextField from "../../../components/common/Inputs/TextField";
 import { Form } from "../../../components/common/Form";
-import { useCreateinfluencerMutation } from "../../../services/api/master/influencerAPI";
+import {
+  useCreateInfluencerMutation,
+  useUpdateInfluencerMutation,
+} from "../../../services/api/master/influencerAPI";
 import { z } from "zod";
 import { notifications } from "@mantine/notifications";
 import InfluencerTypeDropdown from "../../../components/common/GenericDropdowns/InfluencerTypeDropdown";
 
-function InfluencerForm({ initialValues, setOpened }) {
-  const [createInfluencer] = useCreateinfluencerMutation();
+function InfluencerForm({
+  initialValues,
+  setOpened,
+}: {
+  initialValues: Influencer;
+  setOpened: () => {};
+}) {
+  console.log(initialValues);
+  const [createInfluencer] = useCreateInfluencerMutation();
+  const [updateInfluencer] = useUpdateInfluencerMutation();
   return (
     <Form
       initialValues={initialValues}
@@ -24,20 +35,29 @@ function InfluencerForm({ initialValues, setOpened }) {
         influencerCode: z.string(),
       })}
       onSubmit={(values) => {
-        console.log(values);
-        createInfluencer(values).then((res) => {
+        const apiToCall =
+          initialValues?.influencer_Mast_id != 0
+            ? updateInfluencer
+            : createInfluencer;
+        apiToCall(values).then((res) => {
           setOpened();
-          notifications.show({
-            message: "New Influencer was added",
-            title: "Influencer Added",
-            autoClose: 2000,
-          });
+          initialValues?.influencer_Mast_id != 0
+            ? notifications.show({
+                message: `Influencer #${initialValues?.influencerCode} was Updated`,
+                title: "Influencer Updated",
+                autoClose: 2000,
+              })
+            : notifications.show({
+                message: "New Influencer was added",
+                title: "Influencer Added",
+                autoClose: 2000,
+              });
         });
       }}
     >
       <Grid columns={4}>
         <Grid.Col span={2}>
-          <InfluencerTypeDropdown name="influencerType_Name" />
+          <InfluencerTypeDropdown name="InfluencerType" />
         </Grid.Col>
         <Grid.Col span={2}>
           <TextField label="FirmName" name="firm_Name" />

@@ -59,7 +59,7 @@ export const Form = <T extends FieldValues>({
     return (
         <FormProvider {...methods} {...props}>
 
-            <form onSubmit={methods.handleSubmit(onSubmit, (e) => console.log(e))}>
+            <form onSubmit={methods.handleSubmit(onSubmit, (e) => console.log(e, methods.getValues()))}>
                 <fieldset
                     style={{ all: 'unset', width: "100%" }}
                     disabled={methods.formState.isSubmitting}

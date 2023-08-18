@@ -12,13 +12,13 @@ export const influencerTypeAPI = createApi({
       query: () => `/`,
       providesTags: ["InfluencerType"],
     }),
-    getInfluencerTypeByinfluencerTypeID: builder.query<
+    getInfluencerTypeByInfluencerTypeID: builder.query<
       InfluencerType,
       string | unknown
     >({
       query: (influencerTypeID) => `/${influencerTypeID}`,
     }),
-    createinfluencerType: builder.mutation<InfluencerType, InfluencerType>({
+    createInfluencerType: builder.mutation<InfluencerType, InfluencerType>({
       query: (influencerTypeDetails) => ({
         url: `/`,
         method: "POST",
@@ -26,17 +26,17 @@ export const influencerTypeAPI = createApi({
       }),
       invalidatesTags: ["InfluencerType"],
     }),
-    updateinfluencerType: builder.mutation<Influencer, Influencer>({
+    updateInfluencerType: builder.mutation<InfluencerType, InfluencerType>({
       query: (influencerTypeDetails) => ({
-        url: `/${influencerTypeDetails.influencer_Mast_id}`,
-        method: "POST",
+        url: `/${influencerTypeDetails.influencerType_id}`,
+        method: "PUT",
         body: influencerTypeDetails,
       }),
       invalidatesTags: ["InfluencerType"],
     }),
-    deleteinfluencerType: builder.mutation<Influencer, string>({
+    deleteInfluencerType: builder.mutation<InfluencerType, string>({
       query: (influencerTypeID) => ({
-        url: `/${influencerTypeID}`,
+        url: `/?id=${influencerTypeID}`,
         method: "DELETE",
       }),
       invalidatesTags: ["InfluencerType"],
@@ -46,6 +46,8 @@ export const influencerTypeAPI = createApi({
 
 export const {
   useGetAllInfluencerTypesQuery,
-  useLazyGetInfluencerTypeByinfluencerTypeIDQuery,
-  useCreateinfluencerTypeMutation,
+  useLazyGetInfluencerTypeByInfluencerTypeIDQuery,
+  useCreateInfluencerTypeMutation,
+  useUpdateInfluencerTypeMutation,
+  useDeleteInfluencerTypeMutation,
 } = influencerTypeAPI;

@@ -14,7 +14,7 @@ export const projectAPI = createApi({
       query: (projectID) => `/${projectID}`,
     }),
     createProject: builder.mutation<Project, Project>({
-      query: (project) => ({ url: `/AddAddProjectMst`, method: "POST", body: project,}),
+      query: (project) => ({ url: `/`, method: "POST", body: project,}),
     }),
   }),
 })
