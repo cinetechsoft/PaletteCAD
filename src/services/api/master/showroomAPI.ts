@@ -1,31 +1,39 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+//import Showroom from '../../../pages/Masters/Showroom'
 
 
 
 // Define a service using a base URL and expected endpoints
 export const showroomAPI = createApi({
     reducerPath: 'showroomAPI',
+    tagTypes: ["Showroom"],
     baseQuery: fetchBaseQuery({ baseUrl: `${import.meta.env.VITE_API_BASE_URL}/Showroom` }),
     endpoints: (builder) => ({
         getAllShowrooms: builder.query<AllShowrooms, void>({
             query: () => `/`,
+            providesTags: ["Showroom"]
         }),
         getShowroomByshowroomID: builder.query<Showroom, string | unknown>({
             query: (showroomID) => `/${showroomID}`,
+            
         }),
-        getAllShowroomsByCityID: builder.query<Showroom, string | unknown>({
-            query: (cityID) => `/?id=${cityID}`,
-        }),
-        createshowroom: builder.mutation<Showroom, Showroom>({
+        
+        createShowroom: builder.mutation<Showroom, Showroom>({
             query: (showroomDetails) => ({ url: `/`, method: "POST", body: showroomDetails }),
+            invalidatesTags: ["Showroom"]
+           
+         }),        
+         
+        updateShowroom: builder.mutation<Showroom, Showroom>({
+            query: (showroomDetails) => ({ url: `/${showroomDetails.showroomId}`, method: "PUT", body: showroomDetails }),
+            invalidatesTags: ["Showroom"]
         }),
-        updateshowroom: builder.mutation<Showroom, Showroom>({
-            query: (showroomDetails) => ({ url: `/${showroomDetails.showroomId}`, method: "POST", body: showroomDetails }),
-        }),
-        deleteshowroom: builder.mutation<Showroom, string>({
-            query: (showroomID) => ({ url: `/${showroomID}`, method: "DELETE" }),
+        deleteShowroom: builder.mutation<Showroom, string>({
+            query: (showroomID) => ({ url: `/?id=${showroomID}`, method: "DELETE" }),
+            invalidatesTags: ["Showroom"]
+
         }),
     }),
 })
 
-export const { useGetAllShowroomsQuery, useLazyGetShowroomByshowroomIDQuery, useLazyGetAllShowroomsByCityIDQuery } = showroomAPI
+export const { useGetAllShowroomsQuery, useLazyGetShowroomByshowroomIDQuery,useCreateShowroomMutation, useUpdateShowroomMutation, useDeleteShowroomMutation } = showroomAPI

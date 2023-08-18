@@ -8,7 +8,7 @@ import { showroomAPI } from "../services/api/master/showroomAPI";
 import { stateAPI } from "../services/api/master/stateAPI";
 import { cityAPI } from "../services/api/master/cityAPI";
 import { influencerTypeAPI } from "../services/api/master/influencerTypeAPI";
-
+import {roomAPI} from "../services/api/master/roomAPI";
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
@@ -23,6 +23,7 @@ export const store = configureStore({
     [stateAPI.reducerPath]: stateAPI.reducer,
     [cityAPI.reducerPath]: cityAPI.reducer,
     [influencerTypeAPI.reducerPath]: influencerTypeAPI.reducer,
+    [roomAPI.reducerPath]:roomAPI.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -36,7 +37,8 @@ export const store = configureStore({
       .concat(stateAPI.middleware)
       .concat(cityAPI.middleware)
       .concat(quotationAPI.middleware)
-      .concat(influencerTypeAPI.middleware),
+      .concat(influencerTypeAPI.middleware)
+      .concat(roomAPI.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

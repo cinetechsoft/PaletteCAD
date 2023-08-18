@@ -36,17 +36,19 @@ interface Showroom {
   showroomId: number;
   showroomName: string;
   showroomCode: string;
+  showroomAbbreviation: string;
   showroomType: string;
-  gstNo: string;
-  panNo: string;
-  cityId: number;
   address: string;
-  stateId: number;
   phoneNo: string;
-  email: string;
+  email: string;  
+  cityID: number;
+  cityName:string;
+  stateID: number;
+  stateName:string;
+  gstNo: string;
+  panNo: string;  
   active: string;
   percentDiscountMarkup: number;
-  showroomAbbreviation: string;
   showroomOverhead: number;
 }
 
@@ -88,3 +90,13 @@ interface InfluencerType {
 }
 
 type getAllInfluencerTypes = InfluencerType[];
+
+interface Room {
+  roomId: number;
+  roomVisibleNo:string
+  roomName: string;
+  abbreviatedName: string;
+  active:string;
+}
+
+type AllRooms = Room[];
