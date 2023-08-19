@@ -65,6 +65,18 @@ const routes: RouteItem[] = [
         icon: IconProgress,
       },
       {
+        name: "Designation",
+        path: "/designation",
+        element: LazyLoaded.DesignationPage,
+        icon: IconProgress,
+      },
+      {
+        name: "Showroom",
+        path: "/showroom",
+        element: LazyLoaded.ShowroomPage,
+        icon: IconProgress,
+      },
+      {
         name: "Room",
         path: "/room",
         element: LazyLoaded.RoomPage,

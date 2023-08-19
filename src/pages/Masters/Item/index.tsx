@@ -42,7 +42,7 @@ function Item() {
             columnHelper.accessor("itemVisibleNo", {
               cell: (info) => info.getValue(),
             }),
-            columnHelper.accessor("salesItemcode", {
+            columnHelper.accessor("salesItemCode", {
               cell: (info) => info.getValue(),
             }),
             columnHelper.accessor("salesCode", {
@@ -51,7 +51,7 @@ function Item() {
             columnHelper.accessor("venderCode", {
               cell: (info) => info.getValue(),
             }),
-            columnHelper.accessor("purchaseItemCode", {
+            columnHelper.accessor("articleCode", {
               cell: (info) => info.getValue(),
             }),
             columnHelper.accessor("itemName", {
