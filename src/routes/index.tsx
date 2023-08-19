@@ -47,12 +47,6 @@ const routes: RouteItem[] = [
     icon: IconProgress,
     subRoutes: [
       {
-        name: "Showroom",
-        path: "/showroom",
-        element: LazyLoaded.ShowroomPage,
-        icon: IconProgress,
-      },
-      {
         name: "Customer",
         path: "/customer",
         element: LazyLoaded.CustomerPage,

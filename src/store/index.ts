@@ -10,7 +10,7 @@ import { cityAPI } from "../services/api/master/cityAPI";
 import { influencerTypeAPI } from "../services/api/master/influencerTypeAPI";
 import { designationAPI } from "../services/api/master/designationAPI";
 import { itemAPI } from "../services/api/master/itemAPI";
-import {roomAPI} from "../services/api/master/roomAPI";
+import { roomAPI } from "../services/api/master/roomAPI";
 
 export const store = configureStore({
   reducer: {
@@ -28,7 +28,7 @@ export const store = configureStore({
     [influencerTypeAPI.reducerPath]: influencerTypeAPI.reducer,
     [designationAPI.reducerPath]: designationAPI.reducer,
     [itemAPI.reducerPath]: itemAPI.reducer,
-    [roomAPI.reducerPath]:roomAPI.reducer,
+    [roomAPI.reducerPath]: roomAPI.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
