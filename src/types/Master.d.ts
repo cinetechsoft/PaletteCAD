@@ -86,7 +86,6 @@ interface InfluencerType {
   percentDiscountMarkup: number;
   active: string;
 }
-
 type getAllInfluencerTypes = InfluencerType[];
 
 interface Item {
@@ -175,5 +174,4 @@ interface Room {
   abbreviatedName: string;
   active: string;
 }
-
 type AllRooms = Room[];

@@ -28,6 +28,7 @@ export const store = configureStore({
     [designationAPI.reducerPath]: designationAPI.reducer,
     [itemAPI.reducerPath]: itemAPI.reducer,
     [roomAPI.reducerPath]: roomAPI.reducer,
+    [roomAPI.reducerPath]: roomAPI.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.

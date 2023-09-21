@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mantine/core";
+import { Button, Grid, Select } from "@mantine/core";
 import React, { useEffect } from "react";
 import TextField from "../../../components/common/Inputs/TextField";
 import { Form } from "../../../components/common/Form";
@@ -9,6 +9,7 @@ import {
 import { z } from "zod";
 import { notifications } from "@mantine/notifications";
 import NumberField from "../../../components/common/Inputs/NumberField";
+import SelectField from "../../../components/common/Inputs/SelectField";
 
 function InfluencerTypeForm({ initialValues, setOpened }) {
   console.log(initialValues);
@@ -52,6 +53,13 @@ function InfluencerTypeForm({ initialValues, setOpened }) {
         <Grid.Col span={2}>
           <NumberField label="% Discount Markup" name="percentDiscountMarkup" />
         </Grid.Col>
+        {/* <Grid.Col span={2}>
+          <SelectField
+            data={["React", "Angular", "Svelte", "Vue"]}
+            label="Language"
+            name="influencerType_Name"
+          />
+        </Grid.Col> */}
         <Grid.Col>
           <Button type="submit">Submit</Button>
         </Grid.Col>
